@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+  <AddIn Type="Command">
+    <Text>RAA_Int_Module03_QandA_Test - Command 1</Text>
+    <Description>Some description for RAA_Int_Module03_QandA_Test</Description>
+    <Assembly>RAA_Int_Module03_QandA_Test.dll</Assembly>
+    <FullClassName>RAA_Int_Module03_QandA_Test.Command1</FullClassName>
+    <ClientId>187525ac-8310-4cac-87d4-9769154e5b30</ClientId>
+    <VendorId>com.YOUR COMPANY NAME</VendorId>
+    <VendorDescription>YOUR COMPANY NAME, YOUR COMPANY URL</VendorDescription>
+  </AddIn>
+  <AddIn Type="Command">
+    <Text>RAA_Int_Module03_QandA_Test - Command 2</Text>
+    <Description>Some description for RAA_Int_Module03_QandA_Test</Description>
+    <Assembly>RAA_Int_Module03_QandA_Test.dll</Assembly>
+    <FullClassName>RAA_Int_Module03_QandA_Test.Command2</FullClassName>
+    <ClientId>2f18743b-79c6-4f6d-a17b-62bc307e78ff</ClientId>
+    <VendorId>com.YOUR COMPANY NAME</VendorId>
+    <VendorDescription>YOUR COMPANY NAME, YOUR COMPANY URL</VendorDescription>
+  </AddIn>
+  <AddIn Type="Application">
+    <Name>RAA_Int_Module03_QandA_Test</Name>
+    <Assembly>RAA_Int_Module03_QandA_Test.dll</Assembly>
+    <FullClassName>RAA_Int_Module03_QandA_Test.App</FullClassName>
+    <ClientId>f547f71f-e4c4-46cb-b928-1e857a5158f0</ClientId>
+    <VendorId>com.YOUR COMPANY NAME</VendorId>
+    <VendorDescription>YOUR COMPANY NAME, YOUR COMPANY URL</VendorDescription>
+  </AddIn>
+</RevitAddIns>
