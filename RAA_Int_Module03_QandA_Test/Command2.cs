@@ -24,8 +24,47 @@ namespace RAA_Int_Module03_QandA_Test
             // this is a variable for the current Revit model
             Document doc = uiapp.ActiveUIDocument.Document;
 
-            // Your code goes here
+            // 1. get the active view
+            View view = doc.ActiveView;
 
+            // 2. create list of categories that will be used for the filter
+            List<ElementId> categories = new List<ElementId>();
+            categories.Add(new ElementId(BuiltInCategory.OST_Walls));
+
+            // 3a. create rule 1 - width greater than or equal to 200mm
+            ElementId widthParamId = new ElementId(BuiltInParameter.WALL_ATTR_WIDTH_PARAM);
+            FilterRule rule1 = ParameterFilterRuleFactory.CreateGreaterOrEqualRule(widthParamId, 0.5, 0);
+
+            // 3b. create rule 2 - wall function equal 'exterior'
+            ElementId exteriorParamId = new ElementId(BuiltInParameter.FUNCTION_PARAM);
+            FilterRule rule2 = ParameterFilterRuleFactory.CreateEqualsRule(exteriorParamId, (int)WallFunction.Exterior);
+
+            // 4. create LogicalAndFilter using filter rules
+            ElementParameterFilter filter1 = new ElementParameterFilter(rule1);
+            ElementParameterFilter filter2 = new ElementParameterFilter(rule2);
+            LogicalAndFilter elemFilter = new LogicalAndFilter(filter1, filter2);
+
+            // 4. ALT create LogicalOrFilter using filter rules
+            LogicalOrFilter elemFilter2 = new LogicalOrFilter(filter1, filter2);
+
+            using (Transaction t = new Transaction(doc, "Create and Apply Filter"))
+            {
+                t.Start();
+
+                // 5. create parameter filter 
+                ParameterFilterElement paramFilter = ParameterFilterElement.Create(doc, "Exterior Wall Thickness", categories);
+                paramFilter.SetElementFilter(elemFilter2);
+
+                // 6. set graphic overrides
+                OverrideGraphicSettings overrides = new OverrideGraphicSettings();
+                overrides.SetCutLineColor(new Color(255, 0, 0));
+
+                // 7. apply filter to view and set visibility and overrides
+                view.AddFilter(paramFilter.Id);
+                view.SetFilterVisibility(paramFilter.Id, true);
+                view.SetFilterOverrides(paramFilter.Id, overrides);
+                t.Commit();
+            }
 
             return Result.Succeeded;
         }
